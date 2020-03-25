@@ -6,8 +6,11 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
+// 路由
 const index = require('./routes/index')
 const users = require('./routes/users')
+
+// 中间件
 const chine = require('./middleware/object.js')
 
 // mongodb
@@ -19,16 +22,23 @@ const session = require('koa-generic-session')
 const redis = require('koa-redis')
 // error handler
 onerror(app)
-app.keys = ['keys','keyskey']
+
+// redis session
+app.keys = ['keys','keyskeys']
 app.use(session({
+  key: 'hsy',
+  prefix: 'wyx',
   store:new redis()
 }))
+
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
+
 app.use(json())
 app.use(logger())
+
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
@@ -39,8 +49,9 @@ app.use(views(__dirname + '/views', {
 app.use(chine())
 
 // 连接mongodb数据库
-mongoose.connect(dbConfig.dbs,{
-  useNewUrlParser:true
+mongoose.connect(dbsConfig.dbs,{
+  useNewUrlParser:true,
+  useUnifiedTopology: true
 })
 
 // logger
