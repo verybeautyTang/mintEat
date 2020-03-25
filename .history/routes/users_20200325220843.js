@@ -36,6 +36,7 @@ router.post('/addperson', async function (ctx) {
     code  = 0
   } 
   catch (e) {
+    console.log(e)
     code = 1
   }
   ctx.body = { code:code}

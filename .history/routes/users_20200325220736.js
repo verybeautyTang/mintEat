@@ -29,16 +29,19 @@ router.post('/addperson', async function (ctx) {
     name : ctx.request.body.name,
     age : ctx.request.body.age
   })
-  let code ;
+  let code 
   try {
     // 存进数据库
     await person.save()
     code  = 0
   } 
   catch (e) {
+    console.log(e)
     code = 1
   }
-  ctx.body = { code:code}
+  ctx.body ={
+    code:code
+  }
 })
 
 module.exports = router
