@@ -17,8 +17,8 @@ router.get('/bar', function (ctx, next) {
   ctx.body = '我为什么运行不起来'
 })
 
-router.get('/fix', async (ctx) =>{
-  await Store.hset('fix','name',Math.random())
+router.get('/fix',async function (ctx,next) {
+  const st = await Store.hset('fix','name',Math.random)
   ctx.body = {
     code:0
   }

@@ -18,7 +18,7 @@ router.get('/bar', function (ctx, next) {
 })
 
 router.get('/fix', async (ctx) =>{
-  await Store.hset('fix','name',Math.random())
+  await Store.hset('fix','name',Math.random)
   ctx.body = {
     code:0
   }

@@ -6,7 +6,7 @@ router.prefix('/users')
 
 // session
 const Redis = require('koa-redis')
-const Store =  new Redis().client
+// const Store =  new Redis().client
 
 router.get('/', function (ctx, next) {
   ctx.body = 'this is a users response!'
@@ -17,14 +17,14 @@ router.get('/bar', function (ctx, next) {
   ctx.body = '我为什么运行不起来'
 })
 
-router.get('/fix', async (ctx) =>{
-  await Store.hset('fix','name',Math.random())
-  ctx.body = {
-    code:0
-  }
-})
+// router.get('/fix',async function (ctx,next) {
+//   const st = await Store.hset('fix','name',Math.random)
+//   ctx.body = {
+//     code:0
+//   }
+// })
 
-router.post('/addperson', async (ctx)=> {
+router.post('/addperson', async function (ctx) {
   const person = new Person({
     name : ctx.request.body.name,
     age : ctx.request.body.age

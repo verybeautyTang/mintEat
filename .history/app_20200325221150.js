@@ -46,7 +46,7 @@ app.use(views(__dirname + '/views', {
 }))
 
 // 使用中间件
-
+// app.use(chine())
 
 // 连接mongodb数据库
 mongoose.connect(dbsConfig.dbs,{
@@ -66,7 +66,6 @@ app.use(async (ctx, next) => {
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
-app.use(chine())
 // error-handling
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
